@@ -2,7 +2,7 @@ package speedtest
 
 import (
 	"context"
-	"framey/assignment/geo"
+	"framey/assignment/internal/geo"
 )
 
 type Config struct {

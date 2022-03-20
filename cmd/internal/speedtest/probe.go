@@ -3,15 +3,15 @@ package speedtest
 import (
 	"context"
 	"fmt"
-	"framey/assignment/oututil"
-	"framey/assignment/speedtest"
-	"framey/assignment/units"
+	"framey/assignment/internal/oututil"
+	"framey/assignment/internal/units"
+	speedtest2 "framey/assignment/pkg/speedtest"
 	"log"
 
 	"golang.org/x/sync/errgroup"
 )
 
-func download(client *speedtest.Client, server speedtest.Server) {
+func download(client *speedtest2.Client, server speedtest2.Server) {
 	ctx, cancel := context.WithTimeout(context.Background(), *dlTime)
 	defer cancel()
 
@@ -26,7 +26,7 @@ func download(client *speedtest.Client, server speedtest.Server) {
 	finalize(speed)
 }
 
-func upload(client *speedtest.Client, server speedtest.Server) {
+func upload(client *speedtest2.Client, server speedtest2.Server) {
 	ctx, cancel := context.WithTimeout(context.Background(), *ulTime)
 	defer cancel()
 

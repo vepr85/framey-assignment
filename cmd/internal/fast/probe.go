@@ -3,15 +3,15 @@ package fast
 import (
 	"context"
 	"fmt"
-	"framey/assignment/fast"
-	"framey/assignment/oututil"
-	"framey/assignment/units"
+	"framey/assignment/internal/oututil"
+	"framey/assignment/internal/units"
+	fast2 "framey/assignment/pkg/fast"
 	"log"
 
 	"golang.org/x/sync/errgroup"
 )
 
-func download(m *fast.Manifest, client *fast.Client) {
+func download(m *fast2.Manifest, client *fast2.Client) {
 	ctx, cancel := context.WithTimeout(context.Background(), *dlTime)
 	defer cancel()
 
@@ -26,7 +26,7 @@ func download(m *fast.Manifest, client *fast.Client) {
 	finalize(speed)
 }
 
-func upload(m *fast.Manifest, client *fast.Client) {
+func upload(m *fast2.Manifest, client *fast2.Client) {
 	ctx, cancel := context.WithTimeout(context.Background(), *ulTime)
 	defer cancel()
 

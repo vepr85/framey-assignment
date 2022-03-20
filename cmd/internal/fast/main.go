@@ -2,7 +2,7 @@ package fast
 
 import (
 	"context"
-	"framey/assignment/fast"
+	fast2 "framey/assignment/pkg/fast"
 	"log"
 )
 
@@ -12,12 +12,12 @@ func Main(args []string) {
 		panic(err)
 	}
 
-	var client fast.Client
+	var client fast2.Client
 
 	ctx, cancel := context.WithTimeout(context.Background(), *cfgTime)
 	defer cancel()
 
-	m, err := fast.GetManifest(ctx, *urlCount)
+	m, err := fast2.GetManifest(ctx, *urlCount)
 	if err != nil {
 		log.Fatalf("Error loading fast.com configuration: %v", err)
 	}

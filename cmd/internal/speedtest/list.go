@@ -3,7 +3,7 @@ package speedtest
 import (
 	"context"
 	"fmt"
-	"framey/assignment/speedtest"
+	speedtest2 "framey/assignment/pkg/speedtest"
 	"log"
 )
 
@@ -11,8 +11,8 @@ import (
 //
 func listServers(
 	ctx context.Context,
-	client *speedtest.Client,
-) []speedtest.Server {
+	client *speedtest2.Client,
+) []speedtest2.Server {
 	servers, err := client.LoadAllServers(ctx)
 	if err != nil {
 		log.Fatalf("Failed to load server list: %v\n", err)
@@ -26,8 +26,8 @@ func listServers(
 	return servers
 }
 
-func pruneBlockedServers(servers []speedtest.Server) []speedtest.Server {
-	n := make([]speedtest.Server, len(servers)-len(srvBlk))[:0]
+func pruneBlockedServers(servers []speedtest2.Server) []speedtest2.Server {
+	n := make([]speedtest2.Server, len(servers)-len(srvBlk))[:0]
 	for _, s := range servers {
 		var i bool
 		for _, b := range srvBlk {
@@ -44,7 +44,7 @@ func pruneBlockedServers(servers []speedtest.Server) []speedtest.Server {
 
 // Iterates through the list of server and prints them out.
 //
-func printServers(client *speedtest.Client) {
+func printServers(client *speedtest2.Client) {
 	ctx, cancel := context.WithTimeout(context.Background(), *cfgTime)
 	defer cancel()
 

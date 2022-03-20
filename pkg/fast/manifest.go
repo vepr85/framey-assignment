@@ -2,19 +2,19 @@ package fast
 
 import (
 	"context"
-	"framey/assignment/fast/internal"
+	internal2 "framey/assignment/pkg/fast/internal"
 )
 
 type Manifest struct {
-	m *internal.Manifest
+	m *internal2.Manifest
 }
 
 func GetManifest(ctx context.Context, urls int) (*Manifest, error) {
-	tok, err := internal.GetToken(ctx)
+	tok, err := internal2.GetToken(ctx)
 	if err != nil {
 		return nil, err
 	}
-	mi, err := internal.GetManifest(ctx, tok, urls)
+	mi, err := internal2.GetManifest(ctx, tok, urls)
 	if err != nil {
 		return nil, err
 	}

@@ -2,7 +2,7 @@ package speedtest
 
 import (
 	"flag"
-	"framey/assignment/speedtest"
+	"framey/assignment/pkg/speedtest"
 	"strconv"
 	"strings"
 	"time"

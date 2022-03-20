@@ -3,7 +3,7 @@ package speedtest
 import (
 	"context"
 	"fmt"
-	"framey/assignment/geo"
+	"framey/assignment/internal/geo"
 	"golang.org/x/sync/errgroup"
 	"net/url"
 	"sort"

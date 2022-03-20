@@ -3,8 +3,8 @@ package speedtest
 import (
 	"context"
 	"fmt"
-	"framey/assignment/geo"
-	"framey/assignment/speedtest"
+	"framey/assignment/internal/geo"
+	speedtest2 "framey/assignment/pkg/speedtest"
 	"log"
 	"time"
 )
@@ -12,18 +12,18 @@ import (
 // Selects a server to use, either selected by the user or by a low latency
 // selection algorithm.
 //
-func selectServer(client *speedtest.Client, cfg speedtest.Config, servers []speedtest.Server) speedtest.Server {
+func selectServer(client *speedtest2.Client, cfg speedtest2.Config, servers []speedtest2.Server) speedtest2.Server {
 	var (
 		distance geo.Kilometers
 		latency  time.Duration
-		server   speedtest.Server
+		server   speedtest2.Server
 	)
 
 	ctx, cancel := context.WithTimeout(context.Background(), *pngTime)
 	defer cancel()
 
 	if *srvID != 0 {
-		id := speedtest.ServerID(*srvID)
+		id := speedtest2.ServerID(*srvID)
 
 		// Meh, linear search.
 		i := -1
@@ -38,7 +38,7 @@ func selectServer(client *speedtest.Client, cfg speedtest.Config, servers []spee
 		}
 
 		server = servers[i]
-		l, err := server.AverageLatency(ctx, client, speedtest.DefaultLatencySamples)
+		l, err := server.AverageLatency(ctx, client, speedtest2.DefaultLatencySamples)
 		if err != nil {
 			log.Fatalf("Error getting latency for (%v): %v", server, err)
 		}
@@ -46,11 +46,11 @@ func selectServer(client *speedtest.Client, cfg speedtest.Config, servers []spee
 		latency = l
 		distance = cfg.Coordinates.DistanceTo(server.Coordinates)
 	} else {
-		distanceMap := speedtest.SortServersByDistance(servers, cfg.Coordinates)
+		distanceMap := speedtest2.SortServersByDistance(servers, cfg.Coordinates)
 
 		// Truncate to just a few of the closest servers for the latency test.
 		const maxCloseServers = 5
-		closestServers := func() []speedtest.Server {
+		closestServers := func() []speedtest2.Server {
 			if len(servers) > maxCloseServers {
 				return servers[:maxCloseServers]
 			} else {
@@ -58,8 +58,8 @@ func selectServer(client *speedtest.Client, cfg speedtest.Config, servers []spee
 			}
 		}()
 
-		latencyMap, err := speedtest.StableSortServersByAverageLatency(
-			closestServers, ctx, client, speedtest.DefaultLatencySamples)
+		latencyMap, err := speedtest2.StableSortServersByAverageLatency(
+			closestServers, ctx, client, speedtest2.DefaultLatencySamples)
 		if err != nil {
 			log.Fatalf("Error getting server latencies: %v", err)
 		}

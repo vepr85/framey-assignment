@@ -3,7 +3,7 @@ package speedtest
 import (
 	"context"
 	"fmt"
-	"framey/assignment/speedtest"
+	"framey/assignment/pkg/speedtest"
 	"log"
 )
 

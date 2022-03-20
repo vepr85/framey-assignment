@@ -1,7 +1,7 @@
 package speedtest
 
 import (
-	"framey/assignment/geo"
+	"framey/assignment/internal/geo"
 	"math/rand"
 	"testing"
 	"time"

@@ -2,9 +2,9 @@ package fast
 
 import (
 	"context"
-	"framey/assignment/prober"
-	"framey/assignment/prober/proberutil"
-	"framey/assignment/units"
+	"framey/assignment/internal/prober"
+	"framey/assignment/internal/prober/proberutil"
+	"framey/assignment/internal/units"
 	"io"
 )
 

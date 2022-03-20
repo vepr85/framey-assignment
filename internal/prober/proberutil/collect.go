@@ -1,8 +1,8 @@
 package proberutil
 
 import (
-	"framey/assignment/prober"
-	"framey/assignment/units"
+	"framey/assignment/internal/prober"
+	"framey/assignment/internal/units"
 	"time"
 )
 
